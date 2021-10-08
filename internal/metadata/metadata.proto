@@ -1,0 +1,65 @@
+syntax = "proto3";
+package metadata;
+
+option go_package = ".;metadata";
+
+// encapsulates the parameters of a given application container
+message ApplicationContainer {
+
+  // identifies the canoe generator which generated this particular executable
+  string canoe_version = 1;
+
+  // identifies whether a custom wrapper executable was used to generate this
+  // particular executable
+  bool custom_wrapper = 10;
+
+  // provides various configuration parameters which affect how runtimes are
+  // located and launched
+  RuntimeConfiguration runtime = 20;
+
+  // provides various configuration parameters which affect how applications are
+  // launched
+  ApplicationConfiguration application = 21;
+}
+
+// encapsulates various configuration parameters which shall be passed to the
+// runtime upon application startup
+message RuntimeConfiguration {
+
+  // identifies the minimum required runtime version for launching the wrapped
+  // application
+  uint64 minimum_version = 1;
+
+  // identifies the maximum permitted runtime version for launching the wrapped
+  // application
+  //
+  // ignored if set to zero
+  uint64 maximum_version = 2;
+
+  // TODO: Add 64-bit constraint?
+
+  // identifies the initial amount of memory to allocate to the application upon
+  // runtime startup (equivalent to -Xms)
+  //
+  // omitted from runtime arguments if set to zero
+  uint64 initial_memory = 10;
+
+  // identifies the maximum amount of memory to allocate to the application via
+  // its runtime process
+  //
+  // omitted from runtime arguments if set to zero
+  uint64 memory_limit = 11;
+
+  // specifies additional command line arguments which are to be passed to the
+  // runtime upon application startup
+  string additional_arguments = 100;
+}
+
+// encapsulates various configuration parameters related to the wrapped
+// application
+message ApplicationConfiguration {
+
+  // identifies the primary application class which shall be launched within the
+  // target runtime
+  string main_class = 1;
+}
