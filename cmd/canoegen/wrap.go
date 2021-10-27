@@ -167,7 +167,7 @@ func (cmd *wrapCommand) Execute(context.Context, *flag.FlagSet, ...interface{}) 
 	}
 
 	meta := &metadata.ApplicationContainer{
-		CanoeVersion:  "0.0.0", // TODO
+		CanoeVersion:  internal.Version(),
 		CustomWrapper: len(cmd.wrapperFile) != 0,
 		Runtime: &metadata.RuntimeConfiguration{
 			MinimumVersion:      uint64(cmd.runtimeMinimumVersion),

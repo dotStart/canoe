@@ -1,4 +1,6 @@
-LDFLAGS := -w -s
+APPLICATION_VERSION := 0.1.0
+
+LDFLAGS := -w -s -X github.com/dotstart/canoe/internal.version=${APPLICATION_VERSION}
 UPX_FLAGS := --ultra-brute
 
 GO := $(shell command -v go 2> /dev/null)
