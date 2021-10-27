@@ -1,5 +1,8 @@
-GO := $(shell command -v go 2> /dev/null)
 LDFLAGS := -w -s
+UPX_FLAGS := --ultra-brute
+
+GO := $(shell command -v go 2> /dev/null)
+UPX_BIN := $(shell command -v upx 2> /dev/null)
 export
 
 all: check-env tools package
@@ -18,6 +21,12 @@ ifndef GO
 	$(error "go is unavailable")
 endif
 	@echo $(GO)
+	@echo -n "Checking for upx ... "
+ifndef UPX_BIN
+		@echo "Not found - Builds may be larger than usual"
+else
+		@echo $(UPX_BIN)
+endif
 
 tools: wrappers
 	$(MAKE) -f tools.make build
