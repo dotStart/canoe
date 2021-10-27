@@ -1,4 +1,5 @@
 GO := $(shell command -v go 2> /dev/null)
+LDFLAGS := -w -s
 export
 
 all: check-env tools package

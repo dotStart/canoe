@@ -14,4 +14,4 @@ $(PLATFORMS):
 	@export GOARCH=$(arch);
 
 	@echo "==> Building ${os}-${arch} canoegen"
-	@$(GO) build -v ${LDFLAGS} -o build/tools/$(os)-$(arch)/canoegen$(ext) github.com/dotstart/canoe/cmd/canoegen
+	@$(GO) build -v -ldflags "${LDFLAGS}" -o build/tools/$(os)-$(arch)/canoegen$(ext) github.com/dotstart/canoe/cmd/canoegen

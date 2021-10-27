@@ -14,9 +14,9 @@ $(PLATFORMS):
 	@export GOARCH=$(arch);
 
 	@echo "==> Building ${os}-${arch} CLI wrapper"
-	@$(GO) build -v -o build/wrappers/$(os)-$(arch)/canoew$(ext) github.com/dotstart/canoe/cmd/canoew-cli
+	@$(GO) build -v -ldflags "${LDFLAGS}" -o build/wrappers/$(os)-$(arch)/canoew$(ext) github.com/dotstart/canoe/cmd/canoew-cli
 
 	@if [ "$(os)" = "windows" ]; then\
 		echo "==> Building ${os}-${arch} GUI wrapper"; \
-		$(GO) build -v -ldflags -H=windowsgui -o build/wrappers/$(os)-$(arch)/canoew-gui$(ext) github.com/dotstart/canoe/cmd/canoew-gui; \
+		$(GO) build -v -ldflags "-H=windowsgui ${LDFLAGS}" -o build/wrappers/$(os)-$(arch)/canoew-gui$(ext) github.com/dotstart/canoe/cmd/canoew-gui; \
 	fi
