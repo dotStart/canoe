@@ -37,7 +37,7 @@ func ReadExecutableFooter(target string) (*metadata.ApplicationContainer, error)
 	}
 
 	// size field is 16-bit
-	if _, err := f.Seek(-footerSize, 2); err != nil {
+	if _, err := f.Seek(-footerSize, io.SeekEnd); err != nil {
 		return nil, fmt.Errorf("failed to seek to wrapper footer: %w", err)
 	}
 
